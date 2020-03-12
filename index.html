@@ -7,13 +7,28 @@
   <meta name="author" content="wmiz">
   <meta name="description" content="">
 
-  <link href="css/reset.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="reset.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <p>Hello, world!</p>
+  <div id="library-container">
 
-  <script src="js/script.js"></script>
+  </div>
+  <button id="new">NEW BOOK</button>
+
+  <div id="new-form" style="display: none">
+  	<p>Title</p>
+  	<input type="text" id="title"></input><br>
+  	<p>Author</p>
+  	<input type="text" id="author"></input>
+  	<p>Length</p>
+  	<input type="number" id="pages"> pages</input><br>
+  	<input type="radio" id="read" name="read-status" checked="true">Read</input>
+  	<input type="radio" name="read-status" id="unread">Unread</input><br>
+  	<button id="form-submit">Add Book</button>
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
