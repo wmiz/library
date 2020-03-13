@@ -6,16 +6,27 @@ function Book(title, author, pages, read) {
 	this.pages = pages;
 	this.read = read;
 
+	// toggles read and updates localStorage object to reflect that
 	this.toggleRead = function() {
 		this.read = !this.read;
+		let i = 0;
+		while(localStorage[i]) {
+			let bookData = localStorage[i].split('|')
+			if (bookData[0] == this.title && bookData[1] == this.author && bookData[2] == this.pages.toString() && bookData[3] === (!this.read).toString()) {
+				localStorage.setItem(i.toString(), this.store());
+			}
+		i++;
+		}
 	}
 
+	// paragraph output for book
 	this.entry = function() {
 		let el = document.createElement("P");
 		el.innerHTML = `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "already read" : "not read yet"}`;
 		return el;
 	}
 
+	// button to toggle read
 	let el = document.createElement("BUTTON");
 	el.innerHTML = ("Toggle Read Status")
 	el.addEventListener("click", () => {
@@ -24,11 +35,20 @@ function Book(title, author, pages, read) {
 	})
 	this.toggle = el;
 
-
+	// Store book as string with separators for localStorage
+	this.store = function() {
+		return `${this.title}|${this.author}|${this.pages}|${this.read}`
+	}
 }
 
+//Add to myLibrary and save in localStorage
 function addBookToLibrary(library, book) {
 	library.push(book);
+	let i = 0;
+	while (localStorage[i]) {
+		i++;
+	}
+	localStorage.setItem(i.toString(), book.store());
 }
 
 // Loops through library array and creates new p for each book
@@ -41,12 +61,19 @@ function render(library) {
 	}
 }
 
-let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
-let lotr = new Book("The Lord of the Rings", "J.R.R. Tolkien", 1241, false);
-addBookToLibrary(myLibrary, theHobbit);
-addBookToLibrary(myLibrary, lotr);
+//Get all books from localStorage and load them into myLibrary
+let i = 0;
+while (localStorage[i]) {
+	let bookData = localStorage[i].split('|')
+	let book = new Book(bookData[0], bookData[1], bookData[2], bookData[3] == "true");
+	myLibrary.push(book);
+	i++
+}
+
+//Render populated myLibrary to screen
 render(myLibrary);
 
+//Add eventlisteners to buttons
 let newButton = document.querySelector("#new");
 let newBookForm = document.querySelector("#new-form");
 let submitButton = document.querySelector("#form-submit");
@@ -68,10 +95,6 @@ submitButton.addEventListener("click", function () {
 	if (title && author && pages) {
 		let book = new Book(title, author, pages, read);
 
-		book.title = title;
-		book.author = author;
-		book.pages = pages;
-
 		addBookToLibrary(myLibrary, book);
 
 		newButton.style.display = "block";
@@ -81,6 +104,4 @@ submitButton.addEventListener("click", function () {
 	} else {
 		alert("Please fill out all fields of the form!")
 	}
-
-	
 })
