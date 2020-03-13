@@ -6,9 +6,25 @@ function Book(title, author, pages, read) {
 	this.pages = pages;
 	this.read = read;
 
-	this.info = function() {
-		return `${title} by ${author}, ${pages} pages, ${read ? "already read" : "not read yet"}`;
+	this.toggleRead = function() {
+		this.read = !this.read;
 	}
+
+	this.entry = function() {
+		let el = document.createElement("P");
+		el.innerHTML = `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "already read" : "not read yet"}`;
+		return el;
+	}
+
+	let el = document.createElement("BUTTON");
+	el.innerHTML = ("Toggle Read Status")
+	el.addEventListener("click", () => {
+		this.toggleRead();
+		render(myLibrary);
+	})
+	this.toggle = el;
+
+
 }
 
 function addBookToLibrary(library, book) {
@@ -20,9 +36,8 @@ function render(library) {
 	let libDisplay = document.getElementById("library-container");
 	libDisplay.innerHTML = "";
 	for (book of library) {
-		let entry = document.createElement("P");
-		entry.innerText = book.info();
-		libDisplay.appendChild(entry);
+		libDisplay.appendChild(book.entry());
+		libDisplay.appendChild(book.toggle);
 	}
 }
 
