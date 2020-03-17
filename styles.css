@@ -1,1 +1,58 @@
-/**/
+body {
+	background-color: #FFF2E8;
+}
+
+#titleHead {
+	text-align: center;
+	font-size: xx-large;
+	text-decoration: underline;
+}
+
+.center {
+	width: 94%;
+	margin-left: 3%;
+	margin-top: 2%;
+}
+
+#library-table {
+	text-align: center;
+	background-color: #E7D8C9;
+}
+
+table, th, td {
+  padding: 2%;
+}
+
+.read-true {
+	background-color: #C0E8CF;
+}
+
+.read-false {
+	background-color: #E6BEAE;
+}
+
+.table-title {
+	background-color: #B2967D;
+	font-weight: bold;
+	font-size: large;
+	padding: 1%;
+}
+
+button {
+	background-color: #B2967D;
+	padding: 5px;
+	padding: 1%;
+}
+
+#new {
+	width: 50%;
+	margin-left: 25%;
+}
+
+#new * {
+	padding: 5px;
+}
+
+.submit-param {
+	font-size: large;
+}

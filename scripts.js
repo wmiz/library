@@ -22,6 +22,7 @@ function Book(title, author, pages, read) {
 	// paragraph output for book
 	this.entry = function() {
 		let el = document.createElement("P");
+		el.classList.add("title")
 		el.innerHTML = `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "already read" : "not read yet"}`;
 		return el;
 	}
@@ -53,11 +54,37 @@ function addBookToLibrary(library, book) {
 
 // Loops through library array and creates new p for each book
 function render(library) {
-	let libDisplay = document.getElementById("library-container");
-	libDisplay.innerHTML = "";
+	let libDisplay = document.getElementById("library-table");
+	libDisplay.innerHTML = `<tr>
+				<th class="table-title">Title</th>
+		    	<th class="table-title">Author</th>
+		        <th class="table-title">Length</th>
+		        <th class="table-title">Read?</th>
+      		</tr>`;
 	for (book of library) {
-		libDisplay.appendChild(book.entry());
-		libDisplay.appendChild(book.toggle);
+		let bookEl = document.createElement("TR");
+		let bookTitleEl = document.createElement("TD");
+		let bookAuthorEl = document.createElement("TD");
+		let bookLengthEl = document.createElement("TD");
+		let bookReadEl = document.createElement("TD");
+
+		bookTitleEl.innerHTML = book.title;
+		bookAuthorEl.innerHTML = book.author;
+		bookLengthEl.innerHTML = book.pages;
+		bookReadEl.innerHTML = book.read.toString().charAt(0).toUpperCase() + book.read.toString().slice(1);
+
+		if (book.read) {
+			bookReadEl.classList.add("read-true")
+		} else {
+			bookReadEl.classList.add("read-false")
+		}
+
+		bookEl.appendChild(bookTitleEl);
+		bookEl.appendChild(bookAuthorEl);
+		bookEl.appendChild(bookLengthEl);
+		bookEl.appendChild(bookReadEl);
+
+		libDisplay.appendChild(bookEl);
 	}
 }
 

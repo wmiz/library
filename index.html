@@ -12,18 +12,22 @@
 </head>
 
 <body>
+  <h1 class="center" id="titleHead">My Library</h1>
 
-  <div id="library-container">
-
+  <div>
+    <table id="library-table" class="center" style="width:94%">
+    </table>
   </div>
-  <button id="new">NEW BOOK</button>
 
-  <div id="new-form" style="display: none">
-  	<p>Title</p>
+
+  <button id="new" class="center">Add Book</button>
+
+  <div id="new-form" class="center" style="display: none">
+  	<p class="submit-param">Title</p>
   	<input type="text" id="title"></input><br>
-  	<p>Author</p>
+  	<p class="submit-param">Author</p>
   	<input type="text" id="author"></input>
-  	<p>Length</p>
+  	<p class="submit-param">Length</p>
   	<input type="number" id="pages"> pages</input><br>
   	<input type="radio" id="read" name="read-status" checked="true">Read</input>
   	<input type="radio" name="read-status" id="unread">Unread</input><br>
