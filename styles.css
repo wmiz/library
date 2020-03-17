@@ -49,10 +49,12 @@ button {
 	margin-left: 25%;
 }
 
-#new * {
+#new-form * {
+	margin: 5px;
 	padding: 5px;
 }
 
 .submit-param {
 	font-size: large;
+	font-weight: bold;
 }
