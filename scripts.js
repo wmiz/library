@@ -6,6 +6,45 @@ function Book(title, author, pages, read) {
 	this.pages = pages;
 	this.read = read;
 
+	this.getRowEl = function() {
+		let bookEl = document.createElement("TR");
+		let bookTitleEl = document.createElement("TD");
+		let bookAuthorEl = document.createElement("TD");
+		let bookLengthEl = document.createElement("TD");
+		let bookReadEl = document.createElement("TD");
+		let bookReadElInner = document.createElement("A");
+		bookReadEl.setAttribute("style", "padding: 0px");
+		bookReadEl.setAttribute("style", "overflow: hidden");
+		bookReadElInner.classList.add("fill-cell");
+
+
+		let that = this
+
+		bookReadElInner.addEventListener("click", function () {
+			that.toggleRead();
+			render(myLibrary);
+		})
+
+		bookTitleEl.innerHTML = this.title;
+		bookAuthorEl.innerHTML = this.author;
+		bookLengthEl.innerHTML = this.pages;
+		bookReadElInner.innerHTML = this.read ? "Yes" : "No";
+
+		if (book.read) {
+			bookReadEl.classList.add("read-true")
+		} else {
+			bookReadEl.classList.add("read-false")
+		}
+
+		bookEl.appendChild(bookTitleEl);
+		bookEl.appendChild(bookAuthorEl);
+		bookEl.appendChild(bookLengthEl);
+		bookReadEl.appendChild(bookReadElInner);
+		bookEl.appendChild(bookReadEl);
+
+		return bookEl;
+	}
+
 	// toggles read and updates localStorage object to reflect that
 	this.toggleRead = function() {
 		this.read = !this.read;
@@ -62,27 +101,7 @@ function render(library) {
 		        <th class="table-title">Read?</th>
       		</tr>`;
 	for (book of library) {
-		let bookEl = document.createElement("TR");
-		let bookTitleEl = document.createElement("TD");
-		let bookAuthorEl = document.createElement("TD");
-		let bookLengthEl = document.createElement("TD");
-		let bookReadEl = document.createElement("TD");
-
-		bookTitleEl.innerHTML = book.title;
-		bookAuthorEl.innerHTML = book.author;
-		bookLengthEl.innerHTML = book.pages;
-		bookReadEl.innerHTML = book.read.toString().charAt(0).toUpperCase() + book.read.toString().slice(1);
-
-		if (book.read) {
-			bookReadEl.classList.add("read-true")
-		} else {
-			bookReadEl.classList.add("read-false")
-		}
-
-		bookEl.appendChild(bookTitleEl);
-		bookEl.appendChild(bookAuthorEl);
-		bookEl.appendChild(bookLengthEl);
-		bookEl.appendChild(bookReadEl);
+		let bookEl = book.getRowEl();
 
 		libDisplay.appendChild(bookEl);
 	}
@@ -118,7 +137,7 @@ submitButton.addEventListener("click", function () {
 	let pages = document.querySelector("#pages").value;
 	let read = document.querySelector("#read").checked;
 
-	// if all fields filled out
+	// if all fields filled outcreateElement
 	if (title && author && pages) {
 		let book = new Book(title, author, pages, read);
 

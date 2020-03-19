@@ -48,7 +48,7 @@ button {
 	width: 50%;
 	margin-left: 25%;
 }
-
+s
 #new-form * {
 	margin: 5px;
 	padding: 5px;
@@ -57,4 +57,10 @@ button {
 .submit-param {
 	font-size: large;
 	font-weight: bold;
+}
+
+.fill-cell {
+	display: block;
+    margin: -10em;
+    padding: 10em;
 }
