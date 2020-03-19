@@ -13,13 +13,11 @@ function Book(title, author, pages, read) {
 		let bookLengthEl = document.createElement("TD");
 		let bookReadEl = document.createElement("TD");
 		let bookReadElInner = document.createElement("A");
-		bookReadEl.setAttribute("style", "padding: 0px");
-		bookReadEl.setAttribute("style", "overflow: hidden");
+		bookReadEl.style.padding = "0px";
+		bookReadEl.style.overflow = "hidden";
 		bookReadElInner.classList.add("fill-cell");
 
-
 		let that = this
-
 		bookReadElInner.addEventListener("click", function () {
 			that.toggleRead();
 			render(myLibrary);
@@ -102,7 +100,6 @@ function render(library) {
       		</tr>`;
 	for (book of library) {
 		let bookEl = book.getRowEl();
-
 		libDisplay.appendChild(bookEl);
 	}
 }
